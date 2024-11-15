@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Event List</string>
+    <string name="title_home">Home</string>
+    <string name="title_upcoming">Upcoming</string>
+    <string name="title_finished">Finished</string>
+    <string name="event_image">Event Image</string>
+    <string name="open_event_link">Open Event Link</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_event_detail">Deskripsi Event</string>
+    <string name="event_title">Dicoding Event</string>
+    <string name="event_organizer">Dicoding Academy</string>
+    <string name="time">2024-01-01 00:00:00</string>
+    <string name="quota_remaining">0</string>
+    <string name="event_description">Lorem ipsum dolor sir amet</string>
+    <string name="dicoding_link">https://www.dicoding.com/</string>
+    <string name="event_link">Tautan Event</string>
+    <string name="event_name">Bangkit 2024 dengan Kurikulum AI: Langkah Tepat untuk Memulai Karier Teknologi</string>
+    <string name="upcoming_title">Upcoming Events</string>
+    <string name="finished_title">Finished Events</string>
+    <string name="search_event">Search Event...</string>
+    <string name="event_description_title">Deskripsi:</string>
+</resources>
