@@ -47,21 +47,18 @@ class HomeFragment : Fragment() {
             }
         }
 
-        // Set up RecyclerView and Adapter
         val upcomingEventsAdapter = EventAdapter { event ->
             val iDetail = Intent(requireContext(), EventDetailActivity::class.java)
             iDetail.putExtra(EventDetailActivity.EXTRA_EVENT, event)
             startActivity(iDetail)
         }
 
-        // Set up RecyclerView and Adapter
         val finishedEventsAdapter = EventAdapter { event ->
             val iDetail = Intent(requireContext(), EventDetailActivity::class.java)
             iDetail.putExtra(EventDetailActivity.EXTRA_EVENT, event)
             startActivity(iDetail)
         }
 
-        // Set up RecyclerView and Adapter
         val searchedEventsAdapter = EventAdapter { event ->
             val iDetail = Intent(requireContext(), EventDetailActivity::class.java)
             iDetail.putExtra(EventDetailActivity.EXTRA_EVENT, event)
@@ -77,12 +74,10 @@ class HomeFragment : Fragment() {
         binding.searchEventsRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.searchEventsRecyclerView.adapter = searchedEventsAdapter
 
-        // Observe LiveData for upcoming events
         homeViewModel.upcomingEvents.observe(viewLifecycleOwner) { events ->
             upcomingEventsAdapter.submitList(events.take(5)) // Show max 5 events
         }
 
-        // Observe LiveData for finished events
         homeViewModel.finishedEvents.observe(viewLifecycleOwner) { events ->
             finishedEventsAdapter.submitList(events.take(5)) // Show max 5 events
         }
