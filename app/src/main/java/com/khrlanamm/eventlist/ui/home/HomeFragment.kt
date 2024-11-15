@@ -8,14 +8,14 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.khrlanamm.eventlist.databinding.FragmentHomeBinding
-import com.khrlanamm.eventlist.ui.detail.EventDetailActivity
 import com.google.android.material.snackbar.Snackbar
-import com.khrlanamm.eventlist.ui.adapter.EventAdapter
 import com.khrlanamm.eventlist.R
+import com.khrlanamm.eventlist.databinding.FragmentHomeBinding
+import com.khrlanamm.eventlist.ui.adapter.EventAdapter
+import com.khrlanamm.eventlist.ui.detail.EventDetailActivity
 
 
 class HomeFragment : Fragment() {
@@ -65,7 +65,8 @@ class HomeFragment : Fragment() {
             startActivity(iDetail)
         }
 
-        binding.upcomingEventsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.upcomingEventsRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.upcomingEventsRecyclerView.adapter = upcomingEventsAdapter
 
         binding.finishedEventsRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -103,7 +104,8 @@ class HomeFragment : Fragment() {
         binding.searchView.queryHint = getString(R.string.search_event)
 
         // Set up SearchView listener
-        binding.searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object :
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 // Start search on submit (optional if you only want to search on text change)
                 query?.let { searchEvents(it) }
