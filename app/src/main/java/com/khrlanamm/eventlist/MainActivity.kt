@@ -14,7 +14,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.khrlanamm.eventlist.databinding.ActivityMainBinding
-import com.khrlanamm.eventlist.ui.MainViewModel
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.khrlanamm.eventlist.ui
+package com.khrlanamm.eventlist
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
