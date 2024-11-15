@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.khrlanamm.eventlist.ui.home.SettingsViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.khrlanamm.eventlist.R
 import com.khrlanamm.eventlist.databinding.FragmentHomeBinding
@@ -23,6 +25,9 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val homeViewModel: HomeViewModel by viewModels()
+    private val settingsViewModel: SettingsViewModel by viewModels {
+        SettingsViewModel.getInstance(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,14 +42,20 @@ class HomeFragment : Fragment() {
 
         val switchTheme = binding.switchTheme
 
-        switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
-            if (isChecked) {
+        // Observe perubahan mode gelap dari ViewModel
+        settingsViewModel.getDarkMode().asLiveData().observe(viewLifecycleOwner) { isDarkMode ->
+            switchTheme.isChecked = isDarkMode
+            if (isDarkMode) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                switchTheme.isChecked = true
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                switchTheme.isChecked = false
             }
+        }
+
+        // Set listener untuk switch perubahan tema
+        switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+            // Update status tema ke ViewModel
+            settingsViewModel.setDarkMode(isChecked)
         }
 
         val upcomingEventsAdapter = EventAdapter { event ->

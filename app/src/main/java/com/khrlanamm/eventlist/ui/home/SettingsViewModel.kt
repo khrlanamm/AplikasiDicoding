@@ -1,4 +1,4 @@
-package com.example.sched.ui.settings
+package com.khrlanamm.eventlist.ui.home
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
