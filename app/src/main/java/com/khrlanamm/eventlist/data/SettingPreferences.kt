@@ -1,42 +1,35 @@
 package com.khrlanamm.eventlist.data
+
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+class SettingsPreferences private constructor(private val dataStore: DataStore<Preferences>) {
+    fun getDarkMode() = dataStore.data.map { it[DARK_MODE_PREFERENCES] ?: false }
 
-class SettingPreferences private constructor(private val dataStore: DataStore<Preferences>) {
-
-    private val THEME_KEY = booleanPreferencesKey("theme_setting")
-
-    fun getThemeSetting(): Flow<Boolean> {
-        return dataStore.data.map { preferences ->
-            preferences[THEME_KEY] ?: false
-        }
-    }
-
-    suspend fun saveThemeSetting(isDarkModeActive: Boolean) {
-        dataStore.edit { preferences ->
-            preferences[THEME_KEY] = isDarkModeActive
+    suspend fun setDarkMode(darkMode: Boolean) {
+        dataStore.edit {
+            it[DARK_MODE_PREFERENCES] = darkMode
         }
     }
 
     companion object {
-        @Volatile
-        private var INSTANCE: SettingPreferences? = null
+        val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+        private val DARK_MODE_PREFERENCES = booleanPreferencesKey("dark_mode_preferences")
 
-        fun getInstance(dataStore: DataStore<Preferences>): SettingPreferences {
-            return INSTANCE ?: synchronized(this) {
-                val instance = SettingPreferences(dataStore)
+        @Volatile
+        private var INSTANCE: SettingsPreferences? = null
+
+        @JvmStatic
+        fun getInstance(dataStore: DataStore<Preferences>) =
+            INSTANCE ?: synchronized(this) {
+                val instance = SettingsPreferences(dataStore)
                 INSTANCE = instance
                 instance
             }
-        }
     }
-
 }
