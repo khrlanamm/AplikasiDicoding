@@ -9,7 +9,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.map
 
 class SettingsPreferences private constructor(private val dataStore: DataStore<Preferences>) {
-    fun getDarkMode() = dataStore.data.map { it[DARK_MODE_PREFERENCES] ?: false }
+    fun getDarkMode() = dataStore.data.map { it[DARK_MODE_PREFERENCES] == true }
 
     suspend fun setDarkMode(darkMode: Boolean) {
         dataStore.edit {

@@ -31,6 +31,6 @@ class SettingsViewModel private constructor(
     }
 
     companion object {
-        fun getInstance(context: Context) = SettingsViewModel.Factory(context)
+        fun getInstance(context: Context) = Factory(context)
     }
 }
