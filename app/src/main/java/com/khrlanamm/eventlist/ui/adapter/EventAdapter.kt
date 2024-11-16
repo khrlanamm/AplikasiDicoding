@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.khrlanamm.eventlist.data.response.EventDetail
+import com.khrlanamm.eventlist.data.local.entity.EventDetail
 import com.khrlanamm.eventlist.databinding.ItemEventBinding
 
 class EventAdapter(private val onEventClick: (EventDetail) -> Unit) :

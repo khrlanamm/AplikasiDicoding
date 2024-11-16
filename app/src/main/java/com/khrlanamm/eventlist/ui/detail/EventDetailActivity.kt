@@ -9,7 +9,7 @@ import android.text.Html
 import androidx.core.text.HtmlCompat
 import com.bumptech.glide.Glide
 import com.khrlanamm.eventlist.databinding.ActivityEventDetailBinding
-import com.khrlanamm.eventlist.data.response.EventDetail
+import com.khrlanamm.eventlist.data.local.entity.EventDetail
 
 class EventDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEventDetailBinding

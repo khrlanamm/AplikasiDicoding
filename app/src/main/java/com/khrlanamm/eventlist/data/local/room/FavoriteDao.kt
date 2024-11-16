@@ -5,7 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.khrlanamm.eventlist.data.response.EventDetail
+import com.khrlanamm.eventlist.data.local.entity.EventDetail
 
 @Dao
 interface FavoriteDao {
