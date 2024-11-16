@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.khrlanamm.eventlist.data.local.entity.EventDetail
 
-@Database(entities = [EventDetail::class], version = 1, exportSchema = true)
+@Database(entities = [EventDetail::class], version = 1, exportSchema = false)
 abstract class FavoriteDatabase : RoomDatabase() {
     abstract fun favoriteDao(): FavoriteDao
 
@@ -19,7 +19,7 @@ abstract class FavoriteDatabase : RoomDatabase() {
             INSTANCE ?: synchronized(this) {
                 INSTANCE ?: Room.databaseBuilder(
                     context.applicationContext,
-                    FavoriteDatabase::class.java, "sched_database"
+                    FavoriteDatabase::class.java, "local_favorites_data"
                 ).fallbackToDestructiveMigration()
                     .build().also { INSTANCE = it }
             }
