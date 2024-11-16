@@ -22,8 +22,9 @@
             android:layout_gravity="center"
             android:layout_weight="0"
             android:contentDescription="@string/event_favorites_title"
-            android:src="@drawable/finished"
+            android:src="@drawable/love"
             app:backgroundTint="@android:color/transparent"
+            app:tint="?attr/colorPrimary"
             app:elevation="0dp" />
 
         <View
@@ -35,6 +36,7 @@
             android:id="@+id/switch_theme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="?attr/colorPrimary"
             android:text="@string/dark_mode"
             android:textSize="18sp" />
     </LinearLayout>
@@ -54,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:queryHint="@string/search_event"
-            android:background="@android:color/white"
+            android:background="?attr/colorOnPrimary"
             app:iconifiedByDefault="false"/>
     </androidx.cardview.widget.CardView>
 
@@ -78,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/upcoming_title"
-                android:textColor="@color/red"
+                android:textColor="?attr/colorPrimary"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -101,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/finished_title"
-                android:textColor="@color/red"
+                android:textColor="?attr/colorPrimary"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
