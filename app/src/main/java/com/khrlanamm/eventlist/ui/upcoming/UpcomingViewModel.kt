@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.khrlanamm.eventlist.data.response.EventDetail
-import com.khrlanamm.eventlist.data.retrofit.ApiConfig
+import com.khrlanamm.eventlist.data.local.entity.EventDetail
+import com.khrlanamm.eventlist.data.remote.retrofit.ApiConfig
 import kotlinx.coroutines.launch
 
 class UpcomingViewModel : ViewModel() {

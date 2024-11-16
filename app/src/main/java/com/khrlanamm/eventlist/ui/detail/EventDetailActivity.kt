@@ -6,10 +6,14 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.text.Html
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.text.HtmlCompat
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.khrlanamm.eventlist.databinding.ActivityEventDetailBinding
-import com.khrlanamm.eventlist.data.response.EventDetail
+import com.khrlanamm.eventlist.data.local.entity.EventDetail
+import com.khrlanamm.eventlist.R
 
 class EventDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEventDetailBinding
@@ -20,6 +24,13 @@ class EventDetailActivity : AppCompatActivity() {
             @Suppress("DEPRECATION")
             intent.getParcelableExtra(EXTRA_EVENT)
         }
+    }
+
+    private val viewModel by viewModels<EventDetailViewModel> {
+        EventDetailViewModel.getInstance(
+            this,
+            event?.id ?: 0
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +61,36 @@ class EventDetailActivity : AppCompatActivity() {
         binding.eventLinkButton.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(event.link))
             startActivity(intent)
+        }
+
+        viewModel.favFromDatabase.observe(this@EventDetailActivity) { isFavorite ->
+            binding.btnFav.apply {
+                val iconRes = if (isFavorite) {
+                    R.drawable.love
+                } else {
+                    R.drawable.love_border
+                }
+                setImageResource(iconRes)
+
+                setOnClickListener {
+                    if (isFavorite) {
+                        viewModel.deleteEvent()
+                        Toast.makeText(
+                            this@EventDetailActivity,
+                            "Event ini telah DIHAPUS dari daftar favorit anda!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        viewModel.insert(event)
+                        Toast.makeText(
+                            this@EventDetailActivity,
+                            "Event ini berhasil DITAMBAHKAN ke daftar favorit anda!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+                isVisible = true // Pastikan tombol terlihat
+            }
         }
     }
 

@@ -18,6 +18,7 @@ import com.khrlanamm.eventlist.R
 import com.khrlanamm.eventlist.databinding.FragmentHomeBinding
 import com.khrlanamm.eventlist.ui.adapter.EventAdapter
 import com.khrlanamm.eventlist.ui.detail.EventDetailActivity
+import com.khrlanamm.eventlist.ui.favorites.FavoritesActivity
 
 
 class HomeFragment : Fragment() {
@@ -134,6 +135,16 @@ class HomeFragment : Fragment() {
                 return true  // Return true to indicate we're handling the change
             }
         })
+        binding.apply {
+            btnFav.setOnClickListener {
+                startActivity(
+                    Intent(
+                        requireActivity(),
+                        FavoritesActivity::class.java
+                    )
+                )
+            }
+        }
     }
 
     private fun showHomeContent(isShowingHomeContent: Boolean) {

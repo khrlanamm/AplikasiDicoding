@@ -7,7 +7,7 @@
         <item name="colorOnPrimary">@color/dark_tan</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/blue_light</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
@@ -24,6 +24,8 @@
         <!-- Background customization -->
         <item name="android:windowBackground">@color/black</item> <!-- Background color for the app -->
     </style>
-
-    <color name="gray">#A9A9A9</color>
+    <style name="Theme.EventList.NoActionBar" parent="Theme.EventList">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>
