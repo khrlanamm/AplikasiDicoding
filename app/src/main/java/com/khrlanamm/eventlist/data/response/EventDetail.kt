@@ -2,7 +2,10 @@ package com.khrlanamm.eventlist.data.response
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity("events_fav")
 @Parcelize
 data class EventDetail(
 	val id: Int,
