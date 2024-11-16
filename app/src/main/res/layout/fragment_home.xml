@@ -23,7 +23,8 @@
             android:layout_weight="0"
             android:contentDescription="@string/event_favorites_title"
             android:src="@drawable/love"
-            app:backgroundTint="@android:color/transparent"
+            app:backgroundTint="?attr/colorSecondaryVariant"
+            android:padding="2dp"
             app:tint="?attr/colorPrimary"
             app:elevation="0dp" />
 
@@ -47,6 +48,7 @@
         android:layout_height="wrap_content"
         android:elevation="4dp"
         app:cardCornerRadius="20dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">

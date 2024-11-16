@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,141 +8,131 @@
     android:layout_height="match_parent"
     tools:context=".ui.detail.EventDetailActivity">
 
+    <!-- Toolbar Layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="?actionBarSize">
+        android:elevation="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/scrollView">
 
-        <LinearLayout
-            android:id="@+id/toolbar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:titleTextColor="?colorOnSecondary"
-                android:layout_weight="1"
-                android:navigationIcon="@drawable/back_button"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btn_fav"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="0dp"
-                android:importantForAccessibility="no"
-                android:src="@drawable/love_border"
-                android:visibility="visible"
-                app:backgroundTint="@android:color/transparent"
-                app:elevation="0dp"
-                app:tint="?attr/colorPrimary" />
-
-        </LinearLayout>
-
-        <!-- Event Image -->
-        <ImageView
-            android:id="@+id/eventImage"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_layout" />
-
-        <!-- Event Name -->
-        <TextView
-            android:id="@+id/eventName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:paddingHorizontal="16dp"
-            android:text="@string/event_title"
-            android:textColor="?attr/colorPrimary"
-            android:gravity="center_horizontal"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/eventImage" />
-
-        <!-- Event Owner -->
-        <TextView
-            android:id="@+id/eventOrganizer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:paddingHorizontal="16dp"
-            android:text="@string/event_organizer"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/eventName" />
-
-        <!-- Event Time -->
-        <TextView
-            android:id="@+id/eventTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="16dp"
-            android:text="@string/time"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/eventOrganizer" />
-
-        <!-- Quota Remaining -->
-        <TextView
-            android:id="@+id/eventQuota"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="16dp"
-            android:text="@string/quota_remaining"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/eventTime" />
-
-        <!-- Event Link Button -->
-        <Button
-            android:id="@+id/eventLinkButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/event_link"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/eventQuota"/>
-
-        <TextView
-            android:id="@+id/eventDescriptionTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:paddingHorizontal="16dp"
-            android:text="@string/event_description_title"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/eventLinkButton" />
-
-        <!-- Description -->
-        <TextView
-            android:id="@+id/eventDescription"
+        <!-- Toolbar -->
+        <Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="16dp"
-            android:text="@string/event_description"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:navigationIcon="@drawable/back_button"
+            android:title="@string/title_event_detail"
+            android:titleTextColor="?colorPrimary"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/eventDescriptionTitle"/>
+            app:layout_constraintEnd_toStartOf="@id/btn_fav"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
-
-
+        <!-- FloatingActionButton -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_fav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/love_border"
+            android:contentDescription="@string/event_favorites_title"
+            app:backgroundTint="@android:color/transparent"
+            app:elevation="0dp"
+            app:tint="?attr/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+
+    <!-- Scrollable Content -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingBottom="?actionBarSize"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/eventImage"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/event_image"
+                android:layout_marginBottom="16dp" />
+
+            <TextView
+                android:id="@+id/eventName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_horizontal"
+                android:text="@string/event_title"
+                android:textColor="?attr/colorPrimary"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/eventOrganizer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center"
+                android:text="@string/event_organizer" />
+
+            <TextView
+                android:id="@+id/eventTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/time" />
+
+            <!-- Quota Remaining -->
+            <TextView
+                android:id="@+id/eventQuota"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/quota_remaining" />
+
+            <!-- Event Link Button -->
+            <Button
+                android:id="@+id/eventLinkButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center"
+                android:text="@string/event_link" />
+
+            <!-- Event Description Title -->
+            <TextView
+                android:id="@+id/eventDescriptionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/event_description_title"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Description -->
+            <TextView
+                android:id="@+id/eventDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/event_description" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
