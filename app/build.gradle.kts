@@ -54,19 +54,19 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    // untuk splashscreen
     implementation(libs.androidx.core.splashscreen)
 
-    // retrofit
     implementation(libs.glide)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
 
-    // RecyclerView for list display
     implementation(libs.androidx.recyclerview)
 
-    // Coroutines
     implementation(libs.kotlinx.coroutines.android)
+
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 }
 

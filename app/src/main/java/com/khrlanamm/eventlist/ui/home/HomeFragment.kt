@@ -5,15 +5,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.khrlanamm.eventlist.databinding.FragmentHomeBinding
-import com.khrlanamm.eventlist.ui.detail.EventDetailActivity
+import com.khrlanamm.eventlist.ui.home.SettingsViewModel
 import com.google.android.material.snackbar.Snackbar
-import com.khrlanamm.eventlist.ui.adapter.EventAdapter
 import com.khrlanamm.eventlist.R
+import com.khrlanamm.eventlist.databinding.FragmentHomeBinding
+import com.khrlanamm.eventlist.ui.adapter.EventAdapter
+import com.khrlanamm.eventlist.ui.detail.EventDetailActivity
 
 
 class HomeFragment : Fragment() {
@@ -21,6 +25,9 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val homeViewModel: HomeViewModel by viewModels()
+    private val settingsViewModel: SettingsViewModel by viewModels {
+        SettingsViewModel.getInstance(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,28 +40,44 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Set up RecyclerView and Adapter
+        val switchTheme = binding.switchTheme
+
+        // Observe perubahan mode gelap dari ViewModel
+        settingsViewModel.getDarkMode().asLiveData().observe(viewLifecycleOwner) { isDarkMode ->
+            switchTheme.isChecked = isDarkMode
+            if (isDarkMode) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
+
+        // Set listener untuk switch perubahan tema
+        switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+            // Update status tema ke ViewModel
+            settingsViewModel.setDarkMode(isChecked)
+        }
+
         val upcomingEventsAdapter = EventAdapter { event ->
             val iDetail = Intent(requireContext(), EventDetailActivity::class.java)
             iDetail.putExtra(EventDetailActivity.EXTRA_EVENT, event)
             startActivity(iDetail)
         }
 
-        // Set up RecyclerView and Adapter
         val finishedEventsAdapter = EventAdapter { event ->
             val iDetail = Intent(requireContext(), EventDetailActivity::class.java)
             iDetail.putExtra(EventDetailActivity.EXTRA_EVENT, event)
             startActivity(iDetail)
         }
 
-        // Set up RecyclerView and Adapter
         val searchedEventsAdapter = EventAdapter { event ->
             val iDetail = Intent(requireContext(), EventDetailActivity::class.java)
             iDetail.putExtra(EventDetailActivity.EXTRA_EVENT, event)
             startActivity(iDetail)
         }
 
-        binding.upcomingEventsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.upcomingEventsRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.upcomingEventsRecyclerView.adapter = upcomingEventsAdapter
 
         binding.finishedEventsRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -63,12 +86,10 @@ class HomeFragment : Fragment() {
         binding.searchEventsRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.searchEventsRecyclerView.adapter = searchedEventsAdapter
 
-        // Observe LiveData for upcoming events
         homeViewModel.upcomingEvents.observe(viewLifecycleOwner) { events ->
             upcomingEventsAdapter.submitList(events.take(5)) // Show max 5 events
         }
 
-        // Observe LiveData for finished events
         homeViewModel.finishedEvents.observe(viewLifecycleOwner) { events ->
             finishedEventsAdapter.submitList(events.take(5)) // Show max 5 events
         }
@@ -94,7 +115,8 @@ class HomeFragment : Fragment() {
         binding.searchView.queryHint = getString(R.string.search_event)
 
         // Set up SearchView listener
-        binding.searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object :
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 // Start search on submit (optional if you only want to search on text change)
                 query?.let { searchEvents(it) }
