@@ -28,6 +28,4 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
-    <color name="blue_light">#B5F8FF</color>
 </resources>
