@@ -1,4 +1,4 @@
-package com.example.sched.database
+package com.khrlanamm.eventlist.data.local.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
