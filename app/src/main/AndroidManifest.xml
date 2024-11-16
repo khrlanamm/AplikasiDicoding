@@ -15,6 +15,9 @@
         android:theme="@style/Theme.EventList"
         tools:targetApi="31">
         <activity
+            android:name=".ui.favorites.FavoritesActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.detail.EventDetailActivity"
             android:exported="false" />
         <activity
